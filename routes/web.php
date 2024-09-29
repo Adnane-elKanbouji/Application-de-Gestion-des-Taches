@@ -7,3 +7,4 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/',[TaskController::class,'index'])->name('home');
+Route::get('category/{category}/tasks',[TaskController::class,'getTaskByCategory'])->name('category_tasks');

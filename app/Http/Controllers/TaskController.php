@@ -70,4 +70,16 @@ class TaskController extends Controller
     {
         //
     }
+
+    public function getTaskByCategory(Category $category){
+      
+      $categories = Category::has('tasks')->get();
+      $tasks = $category->tasks()->with('category')->paginate();
+      
+       return Inertia::render('Task/Index',[
+        'tasks' => $tasks,
+        'categories' => $categories, 
+      ]);
+
+    }
 }

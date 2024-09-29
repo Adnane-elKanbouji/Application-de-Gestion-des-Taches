@@ -1,7 +1,7 @@
 import './bootstrap';
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
-
+import VueDOMPurifyHTML from 'vue-dompurify-html';
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
@@ -10,6 +10,7 @@ createInertiaApp({
   setup({ el, App, props, plugin }) {
     createApp({ render: () => h(App, props) })
       .use(plugin)
+      .use(VueDOMPurifyHTML)
       .mount(el)
   },
 })
