@@ -82,4 +82,14 @@ class TaskController extends Controller
       ]);
 
     }
+
+    public function getTaskOrderBy($colums,$direction){
+        $categories = Category::has('tasks')->get();
+        $tasks = Task::with('category')->orderBy($colums,$direction)->paginate(5);
+        return Inertia::render('Task/Index',[
+            'tasks' => $tasks,
+            'categories' => $categories,
+        ]);
+
+    }
 }

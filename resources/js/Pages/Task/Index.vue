@@ -57,13 +57,16 @@
             </div>
             <div class="col-md-3">
                 <Category :categories="categories"/>
+                <Order/>
             </div>
+            
         </div>
     </div>
 </template>
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import Category from '@/Components/Category.vue';
+import Order  from '@/Components/Order.vue';
 
 const props = defineProps({
     tasks: {
