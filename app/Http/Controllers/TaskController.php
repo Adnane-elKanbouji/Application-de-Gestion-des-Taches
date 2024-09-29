@@ -29,6 +29,10 @@ class TaskController extends Controller
     public function create()
     {
         //
+        $categories = Category::all();
+        return Inertia::render('Task/CreateForm',[
+            'categories' => $categories,
+        ]);
     }
 
     /**
