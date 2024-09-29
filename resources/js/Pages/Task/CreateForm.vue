@@ -26,7 +26,7 @@
                             <label for="Category">
                                 Choose a category
                             </label>
-                            <select class="form-select" v-model="form.category_id"
+                            <select class="form-select" v-model="form.category_id" >
                                 <option v-for="category in categories" :key="category.id" :value="category.id" >{{ category.name }}</option>
 
                             </select>
@@ -44,11 +44,11 @@
    </div>
 </template>
 <script setup>
- import { useForm } from '@/inertiajs/vue3';
+ import { useForm } from '@inertiajs/vue3';
  const form = useForm({
-    title => '',
-    body => '',
-    category_id => ''
+    title : '',
+    body : '',
+    category_id : ''
  })
 
 
