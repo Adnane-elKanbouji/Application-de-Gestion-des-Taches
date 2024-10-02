@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest;
 use App\Models\Category;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -29,18 +30,31 @@ class TaskController extends Controller
     public function create()
     {
         //
+        
         $categories = Category::all();
         return Inertia::render('Task/CreateForm',[
             'categories' => $categories,
         ]);
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
-        //
+        
+        $request->validated();
+        Task::create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'category_id' => $request->category_id,
+        ]);
+       return  redirect()->route('home')->with([
+        'message' => 'add Task succefully',
+        'class' => 'alert alert-success'
+       ]);
+    
     }
 
     /**
@@ -72,7 +86,12 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+
+       return  to_route('home')->with([
+        'message' => 'add Task succefully',
+        'class' => 'alert alert-success'
+       ]);
     }
 
     public function getTaskByCategory(Category $category){

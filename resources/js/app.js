@@ -2,6 +2,7 @@ import './bootstrap';
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import VueDOMPurifyHTML from 'vue-dompurify-html';
+import { ZiggyVue } from 'ziggy-js';
 import Mainlayout from '@/pages/Layouts/MainLayout.vue';
 
 
@@ -16,6 +17,7 @@ createInertiaApp({
     createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(VueDOMPurifyHTML)
+      .use(ZiggyVue)
       .mount(el)
   },
 })

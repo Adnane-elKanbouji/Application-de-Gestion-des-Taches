@@ -2,6 +2,10 @@
     <div class="container">
         <div class="row my-5">
             <div class="col-md-9">
+                <div v-if="$page.props.flash.message" :class="$page.props.flash.class">
+                    {{ $page.props.flash.message }}
+
+                </div>
                 <div class="card">
                     <div class="card-body">
                         <table class="table">
@@ -35,7 +39,11 @@
                                         </div>
                                     </td>
                                     <td>{{ task.created_at }}</td>
-                                    <td></td>
+                                    <td>
+                                        <button type="button" @click="deleteTask(task)" class="bg-danger text-white">
+                                         <i class="fa fa-trash " ></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -43,7 +51,8 @@
                         <ul class="pagination d-flex justify-content-center">
                             <li :class="`page-item ${link.active ? 'active' : ''}`" v-for="(link, index) in tasks.links"
                                 :key="index">
-                                <Link v-if="link.url !== null" class="page-link" :href="link.url" v-dompurify-html="link.label">
+                                <Link v-if="link.url !== null" class="page-link" :href="link.url"
+                                    v-dompurify-html="link.label">
                                 </Link>
                                 <div v-else class="page-link" v-dompurify-html="link.label">
                                 </div>
@@ -56,17 +65,18 @@
 
             </div>
             <div class="col-md-3">
-                <Category :categories="categories"/>
-                <Order/>
+                <Category :categories="categories" />
+                <Order />
             </div>
-            
+
         </div>
     </div>
 </template>
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, router } from '@inertiajs/vue3';
 import Category from '@/Components/Category.vue';
-import Order  from '@/Components/Order.vue';
+import Order from '@/Components/Order.vue';
+import Swal from 'sweetalert2';
 
 const props = defineProps({
     tasks: {
@@ -78,7 +88,26 @@ const props = defineProps({
         required: true,
     }
 })
-
+const deleteTask = (task)  =>{
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            router.delete(route('tasks.destroy', task.id))
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
+        }
+    });
+}
 
 
 </script>

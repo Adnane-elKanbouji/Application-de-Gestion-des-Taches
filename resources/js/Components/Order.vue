@@ -9,22 +9,22 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="dropdown-item" :href="`/order/id/asc/tasks`">
+                        <a class="dropdown-item" :href="route('order.tasks',['id','asc'])" > 
                             ID   <i class="fas fa-arrow-up"></i>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" :href="`/order/id/desc/tasks`">
+                        <a class="dropdown-item" :href="route('order.tasks',['id','desc'])">
                             ID   <i class="fas fa-arrow-down"></i>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" :href="`/order/title/asc/tasks`">
+                        <a class="dropdown-item" :href="route('order.tasks',['title','asc'])">
                             Title A-Z
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" :href="`/order/title/desc/tasks`">
+                        <a class="dropdown-item" :href="route('order.tasks',['title','desc'])">
                             Title Z-A
                         </a>
                     </li>

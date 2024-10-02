@@ -12,7 +12,7 @@
                         <a class="dropdown-item" href="#">All</a>
                     </li>
                     <li v-for="category in categories" :key="category.id">
-                        <a class="dropdown-item" :href="`/category/${category.id}/tasks`">{{ category.name }}</a>
+                        <a class="dropdown-item" :href="route('category.tasks',category.id)">{{ category.name }}</a>
                     </li>
                 </ul>
             </div>
