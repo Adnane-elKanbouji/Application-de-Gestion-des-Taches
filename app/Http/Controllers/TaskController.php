@@ -71,6 +71,11 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         //
+        $categories = Category::all();
+        return Inertia::render('Task/EditForm',[
+            'categories' => $categories,
+            'task' => $task,
+        ]);
     }
 
     /**
@@ -79,6 +84,7 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         //
+        dd('jsjsjsjs');
     }
 
     /**

@@ -17,6 +17,7 @@
                                     <th>Category</th>
                                     <th>Done</th>
                                     <th>Created</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,8 +40,11 @@
                                         </div>
                                     </td>
                                     <td>{{ task.created_at }}</td>
-                                    <td>
-                                        <button type="button" @click="deleteTask(task)" class="bg-danger text-white">
+                                    <td class="d-flex">
+                                        <Link :href="route('tasks.edit',task.id)"  class="btn btn-sm btn-warning">
+                                         <i class="fas fa-edit"></i>
+                                        </Link>
+                                        <button type="button" @click="deleteTask(task)" class="btn btn-sm bg-danger mx-1">
                                          <i class="fa fa-trash " ></i>
                                         </button>
                                     </td>
