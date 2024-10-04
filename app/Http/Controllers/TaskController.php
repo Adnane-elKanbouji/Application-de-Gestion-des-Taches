@@ -30,7 +30,7 @@ class TaskController extends Controller
     public function create()
     {
         //
-        
+
         $categories = Category::all();
         return Inertia::render('Task/CreateForm',[
             'categories' => $categories,
@@ -43,7 +43,7 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request)
     {
-        
+
         $request->validated();
         Task::create([
             'title' => $request->title,
@@ -54,7 +54,7 @@ class TaskController extends Controller
         'message' => 'add Task succefully',
         'class' => 'alert alert-success'
        ]);
-    
+
     }
 
     /**
@@ -81,10 +81,20 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update(TaskRequest $request, Task $task)
     {
         //
-        dd('jsjsjsjs');
+        $request->validated();
+        $task->update([
+            'title' => $request->title,
+            'body' => $request->body,
+            'category_id' => $request->category_id,
+            'done' => $request->done,
+        ]);
+        return redirect()->route('home')->with([
+            'message' => 'Update Task succssfuly',
+            'class' => 'alert alert-success',
+        ]);
     }
 
     /**
@@ -101,13 +111,13 @@ class TaskController extends Controller
     }
 
     public function getTaskByCategory(Category $category){
-      
+
       $categories = Category::has('tasks')->get();
       $tasks = $category->tasks()->with('category')->paginate();
-      
+
        return Inertia::render('Task/Index',[
         'tasks' => $tasks,
-        'categories' => $categories, 
+        'categories' => $categories,
       ]);
 
     }
@@ -120,5 +130,18 @@ class TaskController extends Controller
             'categories' => $categories,
         ]);
 
+    }
+    public function search(Request $request){
+
+        $tasks = Task::with('category')
+        ->where('title','like','%'.$request->term.'%')
+        ->orWhere('body', 'like','%'.$request->term.'%')
+        ->orwhere('id','like','%'.$request->term.'%')
+        ->paginate(5);
+        $categories = Category::has('tasks')->get();
+        return Inertia::render('Task/Index',[
+            'tasks' => $tasks,
+            'categories' => $categories,
+        ]);
     }
 }

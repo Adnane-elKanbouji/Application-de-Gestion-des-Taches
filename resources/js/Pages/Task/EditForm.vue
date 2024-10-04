@@ -5,7 +5,7 @@
              <div class="card">
                  <div class="card-header">
                      <h5 class="text-center mt-2">
-                           Edit Task 
+                           Edit Task
                            <span class="sm text-gray"> #{{ data.id }}</span>
                      </h5>
                  </div>
@@ -26,7 +26,7 @@
                          </div>
                          <div v-if="data.errors.body" class="alert alert-danger py-1">{{ data.errors.body }}</div>
                          <div class="mb-3">
-                             
+
                              <select class="form-select" v-model="data.category_id" >
                                  <option v-for="category in categories" :key="category.id" :value="category.id" >{{ category.name }}</option>
                              </select>
@@ -70,11 +70,10 @@ import {useForm} from '@inertiajs/vue3';
     title:props.task.title,
     body:props.task.body,
     category_id:props.task.category_id,
-    done:props.task.done
+    done:props.task.done ? true : false,
  })
  console.log(props.task);
 const editTask = () =>{
-    return data.put('/tasks');
+    return data.put(route('tasks.update',props.task.id));
 }
-
 </script>

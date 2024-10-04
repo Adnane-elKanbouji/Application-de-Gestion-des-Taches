@@ -2,6 +2,7 @@
     <div class="container">
         <div class="row my-5">
             <div class="col-md-9">
+                <Search />
                 <div v-if="$page.props.flash.message" :class="$page.props.flash.class">
                     {{ $page.props.flash.message }}
 
@@ -80,6 +81,7 @@
 import { Link, router } from '@inertiajs/vue3';
 import Category from '@/Components/Category.vue';
 import Order from '@/Components/Order.vue';
+import Search from '@/Components/Search.vue';
 import Swal from 'sweetalert2';
 
 const props = defineProps({

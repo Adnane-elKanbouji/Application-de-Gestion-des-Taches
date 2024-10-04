@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^localhost/vuejs_with_laravel/Application-de-Gestion-des-Taches$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^localhost/vuejs_with_laravel/Application-de-Gestion-des-Taches$
+RewriteCond %{REQUEST_URI} !/xampp/htdocs/vuejs_with_laravel/Application-de-Gestion-des-Taches/public/
+RewriteRule (.*) /xampp/htdocs/vuejs_with_laravel/Application-de-Gestion-des-Taches/public/$1 [L]

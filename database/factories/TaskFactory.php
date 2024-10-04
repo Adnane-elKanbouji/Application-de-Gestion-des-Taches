@@ -22,6 +22,8 @@ class TaskFactory extends Factory
             "title" => fake()->title(),
             "body" => fake()->paragraph(),
             "category_id" => Category::all()->random()->id,
+            'done' => false,
+
         ];
     }
 }
